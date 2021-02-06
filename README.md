@@ -14,7 +14,7 @@ Rename or delete Dinput8.dll from the game folder.
 
 ## FAQ
 * Does this table work with vanilla DS2?
-No, please see for the vanilla version at https://github.com/pseudostripy/bbj_mod/releases/latest.
+No, please see the vanilla version at https://github.com/pseudostripy/bbj_mod/releases/latest.
 
 * Why does my Cheat Engine table not work when this mod is installed?
 Because it overwrites some of the bytes that some tables use to set up their base pointers. You can just edit the tables to search for the modded array of bytes if you wanted to get them both to work simultaneously.
