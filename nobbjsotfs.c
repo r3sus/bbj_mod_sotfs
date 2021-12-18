@@ -45,6 +45,11 @@ void setup_d8proxy(void)
 
 void attach_hook(void)
 { 	
+
+// nologo patch
+*(BYTE*)0x141604DFA = 0x01;
+//*(BYTE*)0x1400FD880 = 0x94; -- alternative option: code alteration: setne => sete, use either
+
 	/* 	This whole function is untidy and the variable names are terrible, sorry!
 		One day I'll improve as a person and sort this out.
 	
