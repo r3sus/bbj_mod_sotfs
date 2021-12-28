@@ -2,7 +2,8 @@
  *    build cmd with mingw64:
  *        gcc -Wall -Wl,--out-implib,libmessage.a -Wl,--enable-stdcall-fixup
  *            exports.DEF nobbjsotfs.c -shared -o DINPUT8.dll
- *
+
+ *    shorter: gcc -m64 -Wall nobbjsotfs.c -shared -o DINPUT8.dll
  */
 
 #include <windows.h>
@@ -45,12 +46,15 @@ void setup_d8proxy(void)
 
 void attach_hook(void)
 { 	
+
 	/* 	This whole function is untidy and the variable names are terrible, sorry!
 		One day I'll improve as a person and sort this out.
 	
 		Here the inject/patch uses the scratch r10 register for dumping variables
 	*/
     void *base_addr = GetModuleHandle(NULL);
+
+    *(byte*)(base_addr + 0x1604DFA) = 0x01; // nologo patch
 	
 	/*
 		Add the "Baby Jump fix (only one can be active at a time)" code
