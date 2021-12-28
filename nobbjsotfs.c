@@ -1,9 +1,6 @@
 /*
  *    build cmd with mingw64:
- *        gcc -Wall -Wl,--out-implib,libmessage.a -Wl,--enable-stdcall-fixup
- *            exports.DEF nobbjsotfs.c -shared -o DINPUT8.dll
-
- *    shorter: gcc -m64 -Wall nobbjsotfs.c -shared -o DINPUT8.dll
+ * 		gcc -m64 -Wall nobbjsotfs.c -shared -o DINPUT8.dll
  */
 
 #include <windows.h>
@@ -57,7 +54,9 @@ void attach_hook(void)
     *(byte*)(base_addr + 0x1604DFA) = 0x01; // nologo patch
 	
 	/*
-		Add the "Baby Jump fix (only one can be active at a time)" code
+		Add the Baby Jump fix code
+		Note: this is described in the bbj mod CE version as:
+			"Baby Jump fix (only one can be active at a time)"
 	*/
 	
 	static char spd_bytes[] =
