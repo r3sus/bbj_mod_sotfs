@@ -5,7 +5,7 @@
 
 #include <windows.h>
 #include <string.h>
-#include <stdio.h>
+//#include <stdio.h>
 #include <stdint.h>
 
 /*
@@ -52,6 +52,17 @@ void attach_hook(void)
     void *base_addr = GetModuleHandle(NULL);
 
     *(byte*)(base_addr + 0x1604DFA) = 0x01; // nologo patch
+
+// nomsg
+void *jne = base_addr + 0x4F7136;
+
+DWORD op1;
+VirtualProtect(jne, 1,PAGE_EXECUTE_READWRITE, &op1);
+
+*(byte*)jne = 0x74;
+
+VirtualProtect(jne, 1, op1, &op1);
+// end 
 	
 	/*
 		Add the Baby Jump fix code
@@ -204,5 +215,6 @@ BOOL APIENTRY DllMain(HMODULE mod, DWORD reason,
     case DLL_PROCESS_DETACH:
 	break;
     }
+
     return TRUE;
 }
