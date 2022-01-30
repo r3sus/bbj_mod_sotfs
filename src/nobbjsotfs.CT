@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="38">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>30584</ID>
+      <Description>"NoBabyJ (full jump length) min"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>define(inj1,"DarkSoulsII.exe"+37B4B4)
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+inj1:
+  mov r8, [rdi-24e8]
+  movss xmm0, [r8+e8]
+  sqrtps xmm1,xmm1
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+inj1:
+db F3 0F 58 C8 0F C6 C0 55 F3 0F 58 C8 0F C6 C9 00 0F 51 C1
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30573</ID>
+      <Description>"spd"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>"DarkSoulsII.exe"+01682D78</Address>
+      <Offsets>
+        <Offset>E8</Offset>
+        <Offset>148</Offset>
+        <Offset>100</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30585</ID>
+      <Description>"bkp"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>30574</ID>
+          <Description>"spd"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"DarkSoulsII.exe"+01682D90</Address>
+          <Offsets>
+            <Offset>E8</Offset>
+            <Offset>148</Offset>
+            <Offset>F0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30575</ID>
+          <Description>"spd"</Description>
+          <VariableType>Float</VariableType>
+          <Address>"DarkSoulsII.exe"+01682D90</Address>
+          <Offsets>
+            <Offset>E8</Offset>
+            <Offset>188</Offset>
+            <Offset>F8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

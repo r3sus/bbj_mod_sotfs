@@ -1,0 +1,13 @@
+//#define DEBUG
+
+ #ifdef DEBUG
+#include <stdio.h>
+#define DEBUG_PRINT printf
+ #else
+#define DEBUG_PRINT
+ #endif
+
+// add in any void:
+#ifdef DEBUG
+ AllocConsole(); freopen("CONOUT$", "w", stdout);
+#endif
