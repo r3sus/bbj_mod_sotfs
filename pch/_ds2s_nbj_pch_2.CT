@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>30600</ID>
+      <Description>"Patch for DS2 SOTFS"</Description>
+      <Options moHideChildren="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>30595</ID>
+          <Description>"NoBabyJ (full jump length) "</Description>
+          <Options moHideChildren="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>30598</ID>
+              <Description>"Temporary - works until quit - for tests"</Description>
+              <Options moHideChildren="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>30599</ID>
+                  <Description>"Ensure to launch the game."</Description>
+                  <Options moHideChildren="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>30586</ID>
+                      <Description>"Script"</Description>
+                      <VariableType>Auto Assembler Script</VariableType>
+                      <AssemblerScript>{ Game   : DarkSoulsII.exe
+  Version: 
+  Date   : 2023-02-14
+  Author : user
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+luacall( openProcess("DarkSoulsII.exe") )
+aobscanmodule(INJECTb,$process,0F 28 08 48 8B 47 10) // should be unique
+define(INJECTb,INJECTb+B4-95)
+INJECTb:
+  mov r8, [rdi-24e8]
+  movss xmm0, [r8+e8]
+  sqrtps xmm1,xmm1
+
+registersymbol(INJECTb)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECTb: //db F3 0F 58 C8 0F C6 C0 55 F3 0F 58 C8 0F C6 C9 00 0F 51 C1
+  addss xmm1,xmm0
+  shufps xmm0,xmm0,55
+  addss xmm1,xmm0
+  shufps xmm1,xmm1,00
+  sqrtps xmm0,xmm1
+
+unregistersymbol(INJECTb)
+
+{
+// ORIGINAL CODE - INJECTION POINT: DarkSoulsII.exe+37B495
+
+DarkSoulsII.exe+37B469: 44 0F 29 44 24 40     - movaps [rsp+40],xmm8
+DarkSoulsII.exe+37B46F: 48 8B 05 AA D7 25 01  - mov rax,[DarkSoulsII.exe+15D8C20]
+DarkSoulsII.exe+37B476: 48 33 C4              - xor rax,rsp
+DarkSoulsII.exe+37B479: 48 89 44 24 30        - mov [rsp+30],rax
+DarkSoulsII.exe+37B47E: 48 8B F2              - mov rsi,rdx
+DarkSoulsII.exe+37B481: 48 8D 54 24 20        - lea rdx,[rsp+20]
+DarkSoulsII.exe+37B486: 0F 28 FB              - movaps xmm7,xmm3
+DarkSoulsII.exe+37B489: 44 0F 28 C2           - movaps xmm8,xmm2
+DarkSoulsII.exe+37B48D: 48 8B F9              - mov rdi,rcx
+DarkSoulsII.exe+37B490: E8 6B D3 F9 FF        - call DarkSoulsII.exe+318800
+// ---------- INJECTING HERE ----------
+DarkSoulsII.exe+37B495: 0F 28 08              - movaps xmm1,[rax]
+// ---------- DONE INJECTING  ----------
+DarkSoulsII.exe+37B498: 48 8B 47 10           - mov rax,[rdi+10]
+DarkSoulsII.exe+37B49C: 0F 59 C9              - mulps xmm1,xmm1
+DarkSoulsII.exe+37B49F: 48 8B 88 A0 03 00 00  - mov rcx,[rax+000003A0]
+DarkSoulsII.exe+37B4A6: 48 8B 58 48           - mov rbx,[rax+48]
+DarkSoulsII.exe+37B4AA: 48 8B 01              - mov rax,[rcx]
+DarkSoulsII.exe+37B4AD: 0F 28 C1              - movaps xmm0,xmm1
+DarkSoulsII.exe+37B4B0: 0F C6 C1 66           - shufps xmm0,xmm1,66
+// here
+DarkSoulsII.exe+37B4B4: F3 0F 58 C8           - addss xmm1,xmm0
+DarkSoulsII.exe+37B4B8: 0F C6 C0 55           - shufps xmm0,xmm0,55
+DarkSoulsII.exe+37B4BC: F3 0F 58 C8           - addss xmm1,xmm0
+}
+</AssemblerScript>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>30597</ID>
+              <Description>"Exe - permanent effect - revertable"</Description>
+              <Options moHideChildren="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>30596</ID>
+                  <Description>"Ensure to place this CT near the Exe and Exit the game."</Description>
+                  <Options moHideChildren="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>30594</ID>
+                      <Description>"Script - activate to patch, reactivate to restore changes."</Description>
+                      <VariableType>Auto Assembler Script</VariableType>
+                      <AssemblerScript>{ Game   : DarkSoulsII.exe
+  Version:
+  Date   : 2023-02-14
+  Author : user
+
+  This script does blah blah blah
+}
+
+{$Lua}
+local x1
+local function f1(x1)
+local fn1,bit = "DarkSoulsII.exe",64
+openFileAsProcess(fn1,bit==64)
+autoAssemble(x1[1])
+saveOpenedFile(fn1)
+showMessage(x1[2])
+end
+
+[ENABLE]
+--//code from here to '[DISABLE]' will be used to enable the cheat
+
+x1 = {[[
+aobscan(INJECTf,0F 28 08 48 8B 47 10) // should be unique
+define(INJECTf,INJECTf+B4-95)
+INJECTf:
+  mov r8, [rdi-24e8]
+  movss xmm0, [r8+e8]
+  sqrtps xmm1,xmm1
+registersymbol(INJECTf)
+]],"patched"}
+f1(x1)
+
+[DISABLE]
+-- //code from here till the end of the code will be used to disable the cheat
+x1 = {[[
+INJECTf: //db F3 0F 58 C8 0F C6 C0 55 F3 0F 58 C8 0F C6 C9 00 0F 51 C1
+  addss xmm1,xmm0
+  shufps xmm0,xmm0,55
+  addss xmm1,xmm0
+  shufps xmm1,xmm1,00
+  sqrtps xmm0,xmm1
+unregistersymbol(INJECTf)
+]],"restored"}
+f1(x1)
+
+{$asm}
+{
+// ORIGINAL CODE - INJECTION POINT: DarkSoulsII.exe+37B495
+
+DarkSoulsII.exe+37B469: 44 0F 29 44 24 40     - movaps [rsp+40],xmm8
+DarkSoulsII.exe+37B46F: 48 8B 05 AA D7 25 01  - mov rax,[DarkSoulsII.exe+15D8C20]
+DarkSoulsII.exe+37B476: 48 33 C4              - xor rax,rsp
+DarkSoulsII.exe+37B479: 48 89 44 24 30        - mov [rsp+30],rax
+DarkSoulsII.exe+37B47E: 48 8B F2              - mov rsi,rdx
+DarkSoulsII.exe+37B481: 48 8D 54 24 20        - lea rdx,[rsp+20]
+DarkSoulsII.exe+37B486: 0F 28 FB              - movaps xmm7,xmm3
+DarkSoulsII.exe+37B489: 44 0F 28 C2           - movaps xmm8,xmm2
+DarkSoulsII.exe+37B48D: 48 8B F9              - mov rdi,rcx
+DarkSoulsII.exe+37B490: E8 6B D3 F9 FF        - call DarkSoulsII.exe+318800
+// ---------- INJECTING HERE ----------
+DarkSoulsII.exe+37B495: 0F 28 08              - movaps xmm1,[rax]
+// ---------- DONE INJECTING  ----------
+DarkSoulsII.exe+37B498: 48 8B 47 10           - mov rax,[rdi+10]
+DarkSoulsII.exe+37B49C: 0F 59 C9              - mulps xmm1,xmm1
+DarkSoulsII.exe+37B49F: 48 8B 88 A0 03 00 00  - mov rcx,[rax+000003A0]
+DarkSoulsII.exe+37B4A6: 48 8B 58 48           - mov rbx,[rax+48]
+DarkSoulsII.exe+37B4AA: 48 8B 01              - mov rax,[rcx]
+DarkSoulsII.exe+37B4AD: 0F 28 C1              - movaps xmm0,xmm1
+DarkSoulsII.exe+37B4B0: 0F C6 C1 66           - shufps xmm0,xmm1,66
+// here
+DarkSoulsII.exe+37B4B4: F3 0F 58 C8           - addss xmm1,xmm0
+DarkSoulsII.exe+37B4B8: 0F C6 C0 55           - shufps xmm0,xmm0,55
+DarkSoulsII.exe+37B4BC: F3 0F 58 C8           - addss xmm1,xmm0
+}
+</AssemblerScript>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
